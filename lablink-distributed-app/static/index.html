@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LabLink | Distributed Resource Coordinator</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">LabLink <span>Distributed Resource Coordinator</span></div>
+  <div class="status"><i></i> API connected</div>
+</header>
+<main>
+  <section class="hero">
+    <p class="eyebrow">CS3551 · DISTRIBUTED COMPUTING MINI PROJECT</p>
+    <h1>Share lab resources.<br><em>Coordinate without conflicts.</em></h1>
+    <p>Reserve shared campus equipment, observe queue decisions, and inspect the event log.</p>
+  </section>
+  <section class="metrics">
+    <div class="metric"><span>Resources</span><strong id="resourceCount">—</strong></div>
+    <div class="metric"><span>Confirmed reservations</span><strong id="reservationCount">—</strong></div>
+    <div class="metric"><span>Waiting requests</span><strong id="queueCount">—</strong></div>
+  </section>
+  <div class="grid">
+    <section class="panel">
+      <h2>Request a resource</h2>
+      <form id="bookingForm">
+        <label>User / student ID<input id="userId" required maxlength="80" placeholder="e.g. student-152"></label>
+        <label>Resource<select id="resourceId" required></select></label>
+        <div class="two">
+          <label>Start time<input id="startTime" type="datetime-local" required></label>
+          <label>End time<input id="endTime" type="datetime-local" required></label>
+        </div>
+        <button type="submit">Check & reserve</button>
+      </form>
+      <div id="result" class="result hidden" role="status"></div>
+      <p class="hint">Choose the start and end time. The browser sends ISO timestamps in UTC.</p>
+    </section>
+    <section class="panel">
+      <div class="panel-title"><h2>Registered resources</h2><button class="secondary" onclick="loadAll()">Refresh</button></div>
+      <div id="resources" class="resource-list"></div>
+    </section>
+  </div>
+  <section class="panel">
+    <div class="panel-title"><h2>Reservations</h2><button class="secondary" onclick="loadAll()">Refresh</button></div>
+    <div class="table-wrap"><table><thead><tr><th>Resource</th><th>User</th><th>Time slot</th><th>Status</th><th>Action</th></tr></thead><tbody id="reservations"></tbody></table></div>
+  </section>
+  <div class="grid">
+    <section class="panel"><h2>Waiting queue</h2><div id="queue" class="stack"></div></section>
+    <section class="panel"><h2>Recent event log</h2><div id="events" class="stack"></div></section>
+  </div>
+  <footer>LabLink · Educational prototype · Register No. 814724104152</footer>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>
